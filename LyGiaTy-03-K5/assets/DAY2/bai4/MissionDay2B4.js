@@ -5,6 +5,8 @@ cc.Class({
     properties: {
        MissionPrefab: cc.Prefab,
        MissionHolder: cc.Node,
+       Exp: cc.Label,
+       Lv: cc.Label,
        MissionIndexTest: 1,
     },
 
@@ -29,6 +31,9 @@ cc.Class({
         { name: "Vượt Qua Pháo Đài Cổ", done: false },
         { name: "Điều Tra Lịch Sử Xoáy", done: false }
             ];
+
+            this.experience=0;
+            this.level=1;
      },
 
     start () {
@@ -45,7 +50,26 @@ cc.Class({
         let mission =this.missions[index];
         mission.done=true;
         this.updateMissionView();
+        this.ExpPlus();
     },
+
+    ExpPlus()
+    {
+        this.experience+=50;
+        if(this.experience>=100)
+        {
+            this.level++;
+            this.experience=0;
+        }
+        this.SetExpView();
+    },
+
+    SetExpView()
+    {
+        this.Exp.string="EXP: "+this.experience;
+        this.LV.string= "LV: "+this.level;
+    }
+
 
     updateMissionView()
     {
