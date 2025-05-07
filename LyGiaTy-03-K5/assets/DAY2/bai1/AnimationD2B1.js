@@ -17,5 +17,10 @@ cc.Class({
         }, 300);
     },
 
+    Dead()
+    {
+        this.Character.color=cc.Color.BLACK;
+    }
+
     // update (dt) {},
 });

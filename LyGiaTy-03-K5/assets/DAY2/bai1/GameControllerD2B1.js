@@ -73,7 +73,7 @@ cc.Class({
 
         this.PlayerAnimation.OnHit();
         setTimeout(() => {
-            this.TurnChange();
+            this.WinCheck();
         }, 1000);
     },
 
@@ -90,19 +90,37 @@ cc.Class({
     {
         this.Enemy.attacked(this.Player.NormalAttack());
         this.EnemyAnimation.OnHit();
-        this.TurnChange();
+        this.WinCheck();
     },
     SkillBtn()
     {
         this.Enemy.attacked(this.Player.Skill());
         this.EnemyAnimation.OnHit();
-        this.TurnChange();
+        this.WinCheck();
     },
     RecoverBtn()
     {
         this.Player.Recover();
-        this.TurnChange();
+        this.WinCheck();
     },
+
+
+    WinCheck()
+    {
+        
+        if(this.Player.isDead())
+        {
+            this.PlayerAnimation.Dead();
+            this.TurnLabel.string="You LOse! Noob"
+        }
+        else if(this.Enemy.isDead())
+        {
+            this.EnemyAnimation.Dead();
+            this.TurnLabel.string="You Win! Lucky u"
+        }
+        else 
+        this.TurnChange();
+    }
 
     
 });

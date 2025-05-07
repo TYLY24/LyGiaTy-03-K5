@@ -70,6 +70,15 @@ cc.Class({
     start () {
         this.SetStat();
     },
+
+
+    isDead()
+    {
+        if(this.health>0)
+            return false;
+        else
+            return true;
+    }
     // - `health`: 100.
     // - `attack`: Ngẫu nhiên từ 10 đến 20.
     // - `defense`: Ngẫu nhiên từ 5 đến 15.

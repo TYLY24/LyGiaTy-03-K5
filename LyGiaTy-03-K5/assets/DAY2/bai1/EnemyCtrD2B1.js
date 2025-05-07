@@ -75,5 +75,13 @@ cc.Class({
         this.SetStat();
     },
 
+    isDead()
+    {
+        if(this.health>0)
+            return false;
+        else
+            return true;
+    }
+
     // update (dt) {},
 });
