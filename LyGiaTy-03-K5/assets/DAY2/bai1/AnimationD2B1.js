@@ -8,9 +8,17 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () 
+    {
+        
+    },
+    Attack() 
+    {
 
-    OnHit () {
+    },
+
+    OnHit () 
+    {
         this.Character.color=cc.Color.RED;
         setTimeout(() => {
             this. Character.color=cc.Color.WHITE;

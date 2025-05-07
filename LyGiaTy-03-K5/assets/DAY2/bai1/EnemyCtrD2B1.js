@@ -75,6 +75,14 @@ cc.Class({
         this.SetStat();
     },
 
+    ManaCheck()
+    {
+        if(this.energy>=30)
+            return true;
+        else
+            return false;
+    },
+
     isDead()
     {
         if(this.health>0)

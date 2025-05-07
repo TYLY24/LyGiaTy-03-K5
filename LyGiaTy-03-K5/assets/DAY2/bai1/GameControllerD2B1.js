@@ -41,9 +41,9 @@ cc.Class({
         {
             this.TurnLabel.string="Enemy Turn!";
             this.ButtonLock(true);
-            setTimeout(() => {
+           
                 this.EnemyPlay();
-            }, 1000);
+           
             
            
             
@@ -64,7 +64,10 @@ cc.Class({
             this.Player.attacked(this.Enemy.NormalAttack());
             break;
         case 1:
+            if(this.Enemy.ManaCheck())
             this.Player.attacked(this.Enemy.Skill());
+            else
+            this.EnemyPlay();
             break;
         case 2:
             this.Enemy.Recover();
@@ -72,9 +75,9 @@ cc.Class({
         }
 
         this.PlayerAnimation.OnHit();
-        setTimeout(() => {
+        
             this.WinCheck();
-        }, 1000);
+        
     },
 
     ButtonLock(LoN)
@@ -94,9 +97,19 @@ cc.Class({
     },
     SkillBtn()
     {
-        this.Enemy.attacked(this.Player.Skill());
-        this.EnemyAnimation.OnHit();
-        this.WinCheck();
+        if(this.Player.ManaCheck())
+        {
+            this.Enemy.attacked(this.Player.Skill());
+            this.EnemyAnimation.OnHit();
+            this.WinCheck();
+        } 
+        else
+        {
+            this.TurnLabel.string="Not Enough Mana!"
+         
+
+        }
+        
     },
     RecoverBtn()
     {
@@ -119,7 +132,10 @@ cc.Class({
             this.TurnLabel.string="You Win! Lucky u"
         }
         else 
-        this.TurnChange();
+        setTimeout(() => {
+            this.TurnChange();
+        }, 1000);
+        
     }
 
     

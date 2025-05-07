@@ -78,7 +78,15 @@ cc.Class({
             return false;
         else
             return true;
-    }
+    },
+
+    ManaCheck()
+    {
+        if(this.energy>=30)
+            return true;
+        else
+            return false;
+    },
     // - `health`: 100.
     // - `attack`: Ngẫu nhiên từ 10 đến 20.
     // - `defense`: Ngẫu nhiên từ 5 đến 15.
