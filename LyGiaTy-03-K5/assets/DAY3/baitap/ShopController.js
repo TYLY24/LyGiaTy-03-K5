@@ -20,7 +20,7 @@ cc.Class({
     start () {
         let dataScipt = this.getComponent("ItensD3"); 
         this.data = dataScipt.ItemInfo;
-        this.selectedDataPos;
+        this.selectedDataPos=0;
         this. updateItem();
     },
 
@@ -33,7 +33,7 @@ cc.Class({
             let dat=this.data[i];
             if(dat.name===ItemName)
             {
-                this.selectedData = i;
+                this.selectedDataPos = i;
                 this.SlectedItemDes.string=dat.effect;
                 this.SlectedItemName.string=dat.name;
                 this.SlectedItemSprite.spriteFrame=dat.spriteFrame;
@@ -101,7 +101,7 @@ cc.Class({
 
     UseBtn()
     {
-        //console.log("position là "+  position);
+        console.log("position?"+  this.selectedDataPos);
         this.dataScipt.UseItem(this.selectedDataPos);
         this.updateItem();
     },

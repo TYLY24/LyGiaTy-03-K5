@@ -22,20 +22,20 @@ cc.Class({
 
     UseItem(position)
     {
-        console.log("position là "+  this.ItemInfo );
+        console.log("position là "+  position );
         
         
         if(this.ItemInfo[position].type === "consumable")
-        {
-            this.ItemInfo[position].quantity--;
-            if(ItemInfo[position].quantity===0)
             {
-                this.ItemInfo.splice(position, 1);
+                this.ItemInfo[position].quantity--;
+                if(this.ItemInfo[position].quantity === 0)
+                {
+                    this.ItemInfo.splice(position, 1);
+                }
             }
-        }
         else
         {
-            this.ItemInfo[position].equiped=!ItemInfo[position].equiped;
+            this.ItemInfo[position].equiped = !this.ItemInfo[position].equiped;
         }
     },
 
