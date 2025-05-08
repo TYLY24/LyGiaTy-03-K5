@@ -12,18 +12,21 @@ cc.Class({
     {
         this.nameitem="";
         this.controlNode = null;
+        
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    setitem(CtrNode,name,sprite,quantity)
+    setitem(CtrNode,name,sprite,quantity,equiped)
     {
         
         this.nameitem=name;
         this.PrefabSprites.spriteFrame= sprite;
         this.Quantity.string=quantity;
         this.controlNode=CtrNode;
+         this.Equiped.node.active=equiped;
 
+        
        
     },
 

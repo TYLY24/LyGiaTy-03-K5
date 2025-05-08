@@ -17,12 +17,15 @@ cc.Class({
 
     properties: {
         ItemInfo: [ImageItem],
+
+        ItemifoPanel: cc.Node,
     },
 
 
     UseItem(position)
     {
-        console.log("position là "+  position );
+        console.log("position là "+  position + "type la: "+ typeof position );
+       
         
         
         if(this.ItemInfo[position].type === "consumable")
@@ -31,6 +34,7 @@ cc.Class({
                 if(this.ItemInfo[position].quantity === 0)
                 {
                     this.ItemInfo.splice(position, 1);
+                    this.ItemifoPanel.active = false;
                 }
             }
         else
@@ -42,6 +46,7 @@ cc.Class({
     DropItem(position)
     {
         this.ItemInfo.splice(position, 1);
+        this.ItemifoPanel.active = false;
     }
 
     // Các phương thức khác

@@ -12,6 +12,7 @@ cc.Class({
        SlectedItemDes: cc.Label,
 
        UseBtnLabel: cc.Label,
+       ItemifoPanel: cc.Node,
 
     },
 
@@ -27,6 +28,7 @@ cc.Class({
 
     ItemClicked(ItemName)
     {
+        this.ItemifoPanel.active = true;
        // console.log("DE RUNNED SUCCES")
         for(let i=0; i<this.data.length;i++)
         {
@@ -39,21 +41,27 @@ cc.Class({
                 this.SlectedItemSprite.spriteFrame=dat.spriteFrame;
 
 
-                if(dat.type==="consumable")
-                    this.UseBtnLabel.string="Use!"
-                else
-                {
-                    if(dat.equiped)
-                    {
-                        this.UseBtnLabel.string="UnEquip"
-                    }
-                    else
-                    {
-                        this.UseBtnLabel.string="Equip"
-                    }
-                }
+                this.updateBtnLabel(i);
             }
             
+        }
+    },
+
+    updateBtnLabel(position)
+    {
+        let dat=this.data[position];
+        if(dat.type==="consumable")
+            this.UseBtnLabel.string="Use!"
+        else
+        {
+            if(dat.equiped)
+            {
+                this.UseBtnLabel.string="UnEquip"
+            }
+            else
+            {
+                this.UseBtnLabel.string="Equip"
+            }
         }
     },
 
@@ -68,7 +76,7 @@ cc.Class({
                 
                 let childScript=this.ItemHolder.children[i].getComponent("PrefabJSD3");
                     
-                        childScript.setitem(this.node,"",null,"");
+                        childScript.setitem(this.node,"",null,"",false);
                     
             }
         }
@@ -82,7 +90,7 @@ cc.Class({
                     let childScript=child.getComponent("PrefabJSD3");
                     if(childScript.name != dataUpdate.name || childScript.quantity != data.quantity)
                     {
-                        childScript.setitem(this.node,dataUpdate.name,dataUpdate.spriteFrame,dataUpdate.quantity);
+                        childScript.setitem(this.node,dataUpdate.name,dataUpdate.spriteFrame,dataUpdate.quantity,dataUpdate.equiped);
                     }
                 }
                 else
@@ -90,7 +98,7 @@ cc.Class({
                     let spawnedItem = cc.instantiate(this.ItemPrefab);
                     spawnedItem.setParent(this.ItemHolder); 
                     let spawnedScript = spawnedItem.getComponent("PrefabJSD3");
-                    spawnedScript.setitem(this.node,dataUpdate.name,dataUpdate.spriteFrame,dataUpdate.quantity);
+                    spawnedScript.setitem(this.node,dataUpdate.name,dataUpdate.spriteFrame,dataUpdate.quantity,dataUpdate.equiped);
                 
                 }
               
@@ -101,15 +109,17 @@ cc.Class({
 
     UseBtn()
     {
-        console.log("position?"+  this.selectedDataPos);
-        this.dataScipt.UseItem(this.selectedDataPos);
+        //console.log("position?"+  this.selectedDataPos);
+        this.getComponent("ItensD3").UseItem(this.selectedDataPos);
         this.updateItem();
+        this.updateBtnLabel(this.selectedDataPos)
     },
 
     DropBtn()
     {
-        this.dataScipt.DropItem(this.selectedDataPos);
+        this.getComponent("ItensD3").DropItem(this.selectedDataPos);
         this.updateItem();
+       // this.updateBtnLabel(this.selectedDataPos)
     },
 
     // update (dt) {},
