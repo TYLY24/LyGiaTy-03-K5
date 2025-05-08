@@ -1,0 +1,34 @@
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        Character: cc.Node,
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () 
+    {
+        
+    },
+    Attack() 
+    {
+
+    },
+
+    OnHit () 
+    {
+        this.Character.color=cc.Color.RED;
+        setTimeout(() => {
+            this. Character.color=cc.Color.WHITE;
+        }, 300);
+    },
+
+    Dead()
+    {
+        this.Character.color=cc.Color.BLACK;
+    }
+
+    // update (dt) {},
+});
