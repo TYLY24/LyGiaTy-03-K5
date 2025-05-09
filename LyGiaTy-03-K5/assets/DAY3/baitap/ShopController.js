@@ -14,6 +14,7 @@ cc.Class({
        UseBtnLabel: cc.Label,
        ItemifoPanel: cc.Node,
 
+       SeachText: cc.Label,
     },
 
     
@@ -22,7 +23,7 @@ cc.Class({
         let dataScipt = this.getComponent("ItensD3"); 
         this.data = dataScipt.ItemInfo;
         this.selectedDataPos=0;
-        this. updateItem();
+        this. updateItem( this.data);
     },
 
 
@@ -65,9 +66,30 @@ cc.Class({
         }
     },
 
-    updateItem() {
+    ItemSearchUpdate()
+    {
+        if(this.SeachText.string==="")
+        {
+            this.updateItem(this.data);
+        }
+        else
+        {
+            //console.log(searchItems(this.SeachText.string));
+            this.updateItem(this.searchItems(this.SeachText.string));
+        }
+      
+    },
+
+    searchItems(query) {
+        query = query.toLowerCase();
+        return this.data.filter(function(item) {
+            return item.name.toLowerCase().indexOf(query) !== -1;
+        });
+    },
+
+    updateItem(listItem) {
         let childlenght = this.ItemHolder.children.length;
-        let DataLenght = this.data.length;
+        let DataLenght = listItem.length;
 
         if(DataLenght<childlenght)
         {
@@ -83,7 +105,7 @@ cc.Class({
 
             for (let i = 0; i < DataLenght; i++) {
                 let child = this.ItemHolder.children[i];
-                let dataUpdate =this.data[i];
+                let dataUpdate =listItem[i];
                 console.log(dataUpdate);
                 if(child)
                 {
@@ -111,14 +133,14 @@ cc.Class({
     {
         //console.log("position?"+  this.selectedDataPos);
         this.getComponent("ItensD3").UseItem(this.selectedDataPos);
-        this.updateItem();
+        this.updateItem(this.data);
         this.updateBtnLabel(this.selectedDataPos)
     },
 
     DropBtn()
     {
         this.getComponent("ItensD3").DropItem(this.selectedDataPos);
-        this.updateItem();
+        this.updateItem(this.data);
        // this.updateBtnLabel(this.selectedDataPos)
     },
 

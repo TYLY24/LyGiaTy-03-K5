@@ -1,4 +1,3 @@
-// Khai báo ImageItem trước
 var ImageItem = cc.Class({
     name: "ImageItem",  
     properties: {
@@ -11,7 +10,6 @@ var ImageItem = cc.Class({
     }
 });
 
-// Component chính
 cc.Class({
     extends: cc.Component,
 
@@ -19,9 +17,14 @@ cc.Class({
         ItemInfo: [ImageItem],
 
         ItemifoPanel: cc.Node,
+        NewItemPanel: cc.Node,
     },
 
-
+    NewItem()
+    {
+        this.NewItemPanel.active=true;
+    },
+    
     UseItem(position)
     {
         console.log("position là "+  position + "type la: "+ typeof position );
