@@ -13,9 +13,6 @@ cc.Class({
         ShopCtr:cc.Node,
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
 
     start () 
     {
