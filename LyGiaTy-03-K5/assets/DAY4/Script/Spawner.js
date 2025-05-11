@@ -19,6 +19,12 @@ cc.Class({
         {
             this.SpawnBubble();
         }
+        
+    },
+
+    start () 
+    {
+        
     },
     
     
@@ -30,6 +36,7 @@ cc.Class({
             {
                 bubble = cc.instantiate(this.BubblePrefab);
                 bubble.getComponent("BubbleScript").Spawner = this.node;
+                console.log("Bubble SCript: " +bubble.getComponent("BubbleScript").Spawner);
                 bubble.getComponent("BubbleScript").GameController = this.GameController;
             }
         else

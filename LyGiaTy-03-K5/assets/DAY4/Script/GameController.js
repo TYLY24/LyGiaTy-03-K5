@@ -16,8 +16,12 @@ cc.Class({
         this.time=60
     },
     start () {
+        this.decreaseSpeed = 0.010;
+        this.countDownCallback = this.countDownCallback.bind(this); 
+        this.schedule(this.countDownCallback, this.decreaseSpeed);
+
         this.SpawnerScript=this.Spawner.getComponent("Spawner");
-        this.TimmerCountDown();
+       
         this.EndGame();
     },
 
@@ -27,36 +31,26 @@ cc.Class({
         this.Score.string = "Score: " + this.score;
     },
 
-    TimmerCountDown()
-    {
-        let decreaseSpeed = 0.010;
+  
 
-       
-        this.schedule(() => {
-            this.time -= decreaseSpeed;
-
-            if (this.time <= 0) {
-                this.time = 0;                
-                
-               // this.EndGame();
-            } 
-
-            // Update the progress bar
-            this.Timmer.progress = this.time / 60;
-        }, decreaseSpeed);
-    },
-
+    countDownCallback() {
+        this.time -= this.decreaseSpeed;
+        console.log(this.time);
     
-
-    EndGame()
-    {
+        if (this.time <= 0) {
+            this.time = 0;
+            console.log("End Game");          
+        }
+    
+        this.Timmer.progress = this.time / 60;
+    },
+    
+    EndGame() {
         this.scheduleOnce(() => {
-            this.unscheduleAllCallbacks(); 
-            console.log("End Game");
+            this.unschedule(this.countDownCallback);
+            console.log("End Game called");
             this.SpawnerScript.allBacktoPool();
-        }, 6);
-        
-       
+        }, 60);
     }
 
     // update (dt) {},

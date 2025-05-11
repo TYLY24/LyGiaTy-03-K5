@@ -20,21 +20,23 @@ cc.Class({
     },
 
     onEnable() {
-       // console.log("Bubble position.x: " + this.node.position.x);
+      
 
         this.RandomPnLT();
         this.CountDown();
     },
 
     start () {
+        
         this.GameControllerScript=this.GameController.getComponent("GameController");
         this.SpawnerScript=this.Spawner.getComponent("Spawner");
+        //let anim = this.getComponent(cc.Animation);
     },
 
     RandomPnLT()
     {
         this.points= Math.floor(Math.random() * 10) + 1;
-        this.lifeTime=Math.random() * (0.8-0.3) + 0.3
+        this.lifeTime=10;//Math.random() * (0.8-0.3) + 0.3
 
         this.Points.string = this.points;
     },
@@ -42,6 +44,7 @@ cc.Class({
     CountDown()
     {
         this.scheduleOnce(() => {
+           if(this.SpawnerScript)
             this.SpawnerScript.BacktoPool(this.node);
         }, this.lifeTime);
     },
@@ -49,9 +52,17 @@ cc.Class({
     OnClick()
     {
         this.GameControllerScript.PlusScore(this.points);
-        this.SpawnerScript.BacktoPool(this.node);
+        //need unschedule the countdown
+        // anim.play('popAnimation');
+         this.SpawnerScript.BacktoPool(this.node);
+        
 
     },
+    endAnimation()
+    {
+        this.SpawnerScript.BacktoPool(this.node);
+       
+    }
 
     // update (dt) {},
 });
