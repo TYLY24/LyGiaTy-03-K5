@@ -14,7 +14,7 @@ cc.Class({
     {
         this.bubblePool = new cc.NodePool();
 
-        this.MaxBubble = 18;
+        this.MaxBubble = 8;
         for (let i = 0; i < this.MaxBubble; i++)
         {
             this.SpawnBubble();
@@ -62,12 +62,7 @@ cc.Class({
 
     },
 
-    allBacktoPool()
-    {
-        this.bubblePool.clear();
-        this.node.removeAllChildren();
-        
-    },
+
 
 
     BacktoPool(bubble)

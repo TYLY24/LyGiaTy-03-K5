@@ -228,6 +228,9 @@
     "Points": {
       "__id__": 3
     },
+    "BubbleSpriteFrame": {
+      "__uuid__": "854ab8ec-4260-49ff-a5ac-f3bee77a84df"
+    },
     "Spawner": null,
     "GameController": null,
     "_id": ""
@@ -321,9 +324,13 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": false,
+    "_enabled": true,
     "_defaultClip": null,
-    "_clips": [],
+    "_clips": [
+      {
+        "__uuid__": "08d4f3ea-251d-4921-99f1-273cf7b6b33b"
+      }
+    ],
     "playOnLoad": false,
     "_id": ""
   },

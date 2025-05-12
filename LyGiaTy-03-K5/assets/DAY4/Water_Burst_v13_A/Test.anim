@@ -1,9 +1,9 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "popAnimation",
+  "_name": "Test",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 1.05,
+  "_duration": 1.0666666666666667,
   "sample": 60,
   "speed": 1,
   "wrapMode": 1,
@@ -14,25 +14,25 @@
           {
             "frame": 0,
             "value": {
-              "__uuid__": "57cd8292-9796-4e3a-a07d-92f45b07188a"
+              "__uuid__": "d08f36f5-8622-4e21-9ec9-808ed2134ebd"
             }
           },
           {
             "frame": 0.016666666666666666,
             "value": {
-              "__uuid__": "13408cc6-48fa-49e4-8078-1c2a009fbf87"
+              "__uuid__": "57cd8292-9796-4e3a-a07d-92f45b07188a"
             }
           },
           {
             "frame": 0.03333333333333333,
             "value": {
-              "__uuid__": "3256e47e-54e2-4932-ba0c-b8a501044a7d"
+              "__uuid__": "13408cc6-48fa-49e4-8078-1c2a009fbf87"
             }
           },
           {
             "frame": 0.05,
             "value": {
-              "__uuid__": "d08f36f5-8622-4e21-9ec9-808ed2134ebd"
+              "__uuid__": "3256e47e-54e2-4932-ba0c-b8a501044a7d"
             }
           },
           {
@@ -390,15 +390,9 @@
             }
           },
           {
-            "frame": 1.0333333333333334,
+            "frame": 1.05,
             "value": {
-              "__uuid__": "854ab8ec-4260-49ff-a5ac-f3bee77a84df"
-            }
-          },
-          {
-            "frame": 1.0333333333333334,
-            "value": {
-              "__uuid__": "854ab8ec-4260-49ff-a5ac-f3bee77a84df"
+              "__uuid__": "88423441-c1ad-4ca0-ac36-8a2ead718417"
             }
           }
         ]
@@ -407,152 +401,7 @@
   },
   "events": [
     {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
-      "func": "endAnimation",
-      "params": []
-    },
-    {
-      "frame": 1.0333333333333334,
+      "frame": 1.05,
       "func": "endAnimation",
       "params": []
     }
