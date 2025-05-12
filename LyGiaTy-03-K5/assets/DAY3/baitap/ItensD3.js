@@ -20,6 +20,11 @@ cc.Class({
         NewItemPanel: cc.Node,
     },
 
+    onLoad ()
+    {
+        this.equipeditems = [];
+    },
+
     NewItem()
     {
         this.NewItemPanel.active=true;
@@ -27,7 +32,7 @@ cc.Class({
     
     UseItem(position)
     {
-        console.log("position là "+  position + "type la: "+ typeof position );
+       // console.log("position là "+  position + "type la: "+ typeof position );
        
         
         
@@ -42,7 +47,33 @@ cc.Class({
             }
         else
         {
-            this.ItemInfo[position].equiped = !this.ItemInfo[position].equiped;
+            let MaxEquip = this.node.getComponent("ShopController").EquipHolder.children.length;
+
+            if(this.ItemInfo[position].equiped==false && this.equipeditems.length < MaxEquip)
+            {
+                
+                this.ItemInfo[position].equiped = true;
+                this.equipeditems.push(this.ItemInfo[position]);
+                console.log("Da trang bi:" + this.ItemInfo[position].name + " " + this.ItemInfo[position].equiped);
+            }
+            else if(this.ItemInfo[position].equiped==false && this.equipeditems.length >= MaxEquip)
+            {
+                console.log("Khong du cho de trang bi");      
+                
+            }
+            else 
+            {
+                console.log("Da bo trang bi:" + this.equipeditems.name);
+                this.ItemInfo[position].equiped = false;
+                for(let i=0; i<this.equipeditems.length; i++)
+                {
+                    if(this.equipeditems[i].name === this.ItemInfo[position].name)
+                    {
+                        this.equipeditems.splice(i, 1);
+                        break;
+                    }
+                }
+            }
         }
     },
 

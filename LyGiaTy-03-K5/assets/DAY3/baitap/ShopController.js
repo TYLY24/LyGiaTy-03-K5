@@ -5,6 +5,7 @@ cc.Class({
     properties: {
        ItemHolder: cc.Node,
        ItemPrefab: cc.Prefab,
+       EquipHolder: cc.Node,
 
 
        SlectedItemSprite: cc.Sprite,
@@ -15,6 +16,8 @@ cc.Class({
        ItemifoPanel: cc.Node,
 
        SeachText: cc.Label,
+
+       DragSprite: cc.Sprite,
     },
 
     
@@ -22,6 +25,7 @@ cc.Class({
     start () {
         let dataScipt = this.getComponent("ItensD3"); 
         this.data = dataScipt.ItemInfo;
+        this.equipeditemsdata = dataScipt.equipeditems;
         this.selectedDataPos=0;
         this. updateItem( this.data);
     },
@@ -97,8 +101,8 @@ cc.Class({
             {
                 
                 let childScript=this.ItemHolder.children[i].getComponent("PrefabJSD3");
-                    
-                        childScript.setitem(this.node,"",null,"",false);
+               // console.log("update item null"+ null);
+                        childScript.setitem(this.node,null);
                     
             }
         }
@@ -106,13 +110,15 @@ cc.Class({
             for (let i = 0; i < DataLenght; i++) {
                 let child = this.ItemHolder.children[i];
                 let dataUpdate =listItem[i];
-                console.log(dataUpdate);
+                //console.log(dataUpdate);
                 if(child)
                 {
                     let childScript=child.getComponent("PrefabJSD3");
                     if(childScript.name != dataUpdate.name || childScript.quantity != data.quantity)
                     {
-                        childScript.setitem(this.node,dataUpdate.name,dataUpdate.spriteFrame,dataUpdate.quantity,dataUpdate.equiped);
+                        
+                       // console.log("update item"+ dataUpdate);
+                        childScript.setitem(this.node,dataUpdate);
                     }
                 }
                 else
@@ -120,11 +126,32 @@ cc.Class({
                     let spawnedItem = cc.instantiate(this.ItemPrefab);
                     spawnedItem.setParent(this.ItemHolder); 
                     let spawnedScript = spawnedItem.getComponent("PrefabJSD3");
-                    spawnedScript.setitem(this.node,dataUpdate.name,dataUpdate.spriteFrame,dataUpdate.quantity,dataUpdate.equiped);
+                    //console.log("update item"+ dataUpdate);
+                    spawnedScript.setitem(this.node,dataUpdate);
                 
                 }
               
             }
+
+
+        //Update the equiped items
+        let equipedItems = this.EquipHolder.children;
+        for( let i=0; i<equipedItems.length; i++)
+        {
+            let childScript= equipedItems[i].getComponent("PrefabJSD3");
+            if(i<this.equipeditemsdata.length)
+            {
+                let dataUpdate = this.equipeditemsdata[i];
+               // console.log("update item"+ dataUpdate);
+                childScript.setitem(this.node,dataUpdate);
+                
+            }
+            else
+            {
+                //console.log("update item"+ null + "2");
+                childScript.setitem(this.node,null);
+            }
+        }
         
     },
 
