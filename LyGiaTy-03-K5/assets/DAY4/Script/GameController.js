@@ -4,18 +4,35 @@ cc.Class({
     properties: {
         Timmer: cc.ProgressBar,
         Score: cc.Label,
+        HighScore: cc.Label,
 
         Spawner: cc.Node,
+
+        GamePlayer: cc.Node,
+        GameOver: cc.Node,
+        GameOverScore: cc.Label,
+        GameOverHighScore: cc.Label,
     },
 
     // LIFE-CYCLE CALLBACKS:
-
-    onLoad () 
+    
+    onEnable () 
     {
         this.score=0;
+        this.Score.string = "Score: " + this.score;
         this.time=60
-    },
-    start () {
+        var savedScore = cc.sys.localStorage.getItem("highScore");
+        {
+            if (savedScore == null) {
+                this.highScore = 0;
+              //  this.highScore.string = "High Score: " + this.highScore;
+            } else {
+                this.highScore = parseInt(savedScore);
+               // this.highScore.string = "High Score: " + this.highScore;
+            }
+            this.HighScore.string = "High Score: " + this.highScore;
+        }
+   
         this.decreaseSpeed = 0.010;
         this.countDownCallback = this.countDownCallback.bind(this); 
         this.schedule(this.countDownCallback, this.decreaseSpeed);
@@ -29,17 +46,23 @@ cc.Class({
     {
         this.score+=points;
         this.Score.string = "Score: " + this.score;
+        if(this.score > this.highScore)
+        {
+            this.HighScore.string = "High Score: " + this.score;
+            this.highScore = this.score;
+            cc.sys.localStorage.setItem("highScore", this.highScore);
+        }
     },
 
   
 
     countDownCallback() {
         this.time -= this.decreaseSpeed;
-        console.log(this.time);
+        //console.log(this.time);
     
         if (this.time <= 0) {
             this.time = 0;
-            console.log("End Game");          
+                
         }
     
         this.Timmer.progress = this.time / 60;
@@ -49,8 +72,11 @@ cc.Class({
         this.scheduleOnce(() => {
             this.unschedule(this.countDownCallback);
             console.log("End Game called");
-            this.SpawnerScript.allBacktoPool();
-        }, 60);
+            this.GamePlayer.active = false;
+            this.GameOver.active = true;
+            this.GameOverScore.string = "Score: " + this.score;
+            this.GameOverHighScore.string = "Best: " + this.highScore;
+        }, 10);
     }
 
     // update (dt) {},

@@ -30,38 +30,43 @@ cc.Class({
         
         this.GameControllerScript=this.GameController.getComponent("GameController");
         this.SpawnerScript=this.Spawner.getComponent("Spawner");
-        //let anim = this.getComponent(cc.Animation);
+        //this. anim = this.getComponent(cc.Animation);
     },
 
     RandomPnLT()
     {
         this.points= Math.floor(Math.random() * 10) + 1;
-        this.lifeTime=10;//Math.random() * (0.8-0.3) + 0.3
+        this.lifeTime=Math.random() * (0.8-0.3) + 0.3
 
         this.Points.string = this.points;
     },
 
     CountDown()
     {
+        this._scheduledCallback = () => {
+            if (this.SpawnerScript)
+                this.SpawnerScript.BacktoPool(this.node);
+        };
+
         this.scheduleOnce(() => {
-           if(this.SpawnerScript)
-            this.SpawnerScript.BacktoPool(this.node);
+            this._scheduledCallback();
         }, this.lifeTime);
     },
 
     OnClick()
     {
         this.GameControllerScript.PlusScore(this.points);
-        //need unschedule the countdown
-        // anim.play('popAnimation');
-         this.SpawnerScript.BacktoPool(this.node);
+        this.unschedule(this._scheduledCallback);
+        //this.anim.play('popAnimation');
+         this.endAnimation();
         
 
     },
     endAnimation()
     {
+        //this.anim.stop('popAnimation');
+        console.log("endAnimation called");
         this.SpawnerScript.BacktoPool(this.node);
-       
     }
 
     // update (dt) {},
