@@ -20527,7 +20527,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Label",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 572
     },
@@ -21753,7 +21753,7 @@
     "node": {
       "__id__": 593
     },
-    "_enabled": true,
+    "_enabled": false,
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [
@@ -21761,7 +21761,7 @@
         "__id__": 604
       }
     ],
-    "_N$interactable": true,
+    "_N$interactable": false,
     "_N$enableAutoGrayEffect": false,
     "_N$transition": 0,
     "transition": 0,
@@ -22197,7 +22197,7 @@
     "node": {
       "__id__": 606
     },
-    "_enabled": true,
+    "_enabled": false,
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [
@@ -22205,7 +22205,7 @@
         "__id__": 617
       }
     ],
-    "_N$interactable": true,
+    "_N$interactable": false,
     "_N$enableAutoGrayEffect": false,
     "_N$transition": 0,
     "transition": 0,
@@ -22641,7 +22641,7 @@
     "node": {
       "__id__": 619
     },
-    "_enabled": true,
+    "_enabled": false,
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [
@@ -22649,7 +22649,7 @@
         "__id__": 630
       }
     ],
-    "_N$interactable": true,
+    "_N$interactable": false,
     "_N$enableAutoGrayEffect": false,
     "_N$transition": 0,
     "transition": 0,
@@ -23085,7 +23085,7 @@
     "node": {
       "__id__": 632
     },
-    "_enabled": true,
+    "_enabled": false,
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [
@@ -23093,7 +23093,7 @@
         "__id__": 643
       }
     ],
-    "_N$interactable": true,
+    "_N$interactable": false,
     "_N$enableAutoGrayEffect": false,
     "_N$transition": 0,
     "transition": 0,
