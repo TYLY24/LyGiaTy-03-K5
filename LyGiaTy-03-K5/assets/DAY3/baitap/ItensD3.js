@@ -79,6 +79,15 @@ cc.Class({
 
     DropItem(position)
     {
+        
+        for(let i=0; i<this.equipeditems.length; i++)
+            {
+                if(this.equipeditems[i].name === this.ItemInfo[position].name)
+                {
+                    this.equipeditems.splice(i, 1);
+                    break;
+                }
+            }
         this.ItemInfo.splice(position, 1);
         this.ItemifoPanel.active = false;
     }
