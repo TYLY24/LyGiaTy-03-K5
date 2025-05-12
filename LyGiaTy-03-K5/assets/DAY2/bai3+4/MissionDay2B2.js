@@ -5,6 +5,10 @@ cc.Class({
     properties: {
        MissionPrefab: cc.Prefab,
        MissionHolder: cc.Node,
+
+       Exp: cc.Label,
+       Lv: cc.Label,
+
        MissionIndexTest: 1,
     },
 
@@ -12,6 +16,10 @@ cc.Class({
 
      onLoad () 
      {
+        this.Experience = 0;
+        this.Level = 1;
+        this.Exp.string = "Exp: " + this.Experience;
+        this.Lv.string = "Level: " + this.Level;
         this.missions = [
         { name: "Khám Phá Rừng Bí Ẩn", done: false },
         { name: "Tiêu Diệt Quái Vật", done: false },
@@ -38,7 +46,21 @@ cc.Class({
     completeQuestBtn()
     {
         this.completeQuest(this.MissionIndexTest);
+        this.Experience += 10;
+        this.updateExp();
         this.MissionIndexTest++;
+    },
+
+    updateExp()
+    {
+        
+        this.Exp.string = "Exp: " + this.Experience;
+        if (this.Experience >= 100) {
+            this.Level++;
+            this.Experience = 0;
+            this.Exp.string = "Exp: " + this.Experience;
+            this.Lv.string = "Level: " + this.Level;
+        }
     },
     completeQuest(index)
     {

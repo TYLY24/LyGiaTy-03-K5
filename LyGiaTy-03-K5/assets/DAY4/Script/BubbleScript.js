@@ -36,7 +36,7 @@ cc.Class({
     RandomPnLT()
     {
         this.points= Math.floor(Math.random() * 10) + 1;
-        this.lifeTime=Math.random() * (0.8-0.3) + 0.3
+        this.lifeTime=Math.random() * (1.5-0.8) + 0.8
 
         this.Points.string = this.points;
     },
@@ -65,6 +65,7 @@ cc.Class({
     endAnimation()
     {
         //this.anim.stop('popAnimation');
+        this.Points.string = "";
         console.log("endAnimation called");
         this.SpawnerScript.BacktoPool(this.node);
     }

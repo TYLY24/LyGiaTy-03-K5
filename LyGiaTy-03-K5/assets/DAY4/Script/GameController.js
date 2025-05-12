@@ -76,7 +76,7 @@ cc.Class({
             this.GameOver.active = true;
             this.GameOverScore.string = "Score: " + this.score;
             this.GameOverHighScore.string = "Best: " + this.highScore;
-        }, 10);
+        }, 60);
     }
 
     // update (dt) {},
