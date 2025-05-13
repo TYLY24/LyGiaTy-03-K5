@@ -62,21 +62,21 @@ cc.Class({
     
         if (this.time <= 0) {
             this.time = 0;
-                
+            this.EndGame(); 
         }
     
         this.Timmer.progress = this.time / 60;
     },
     
     EndGame() {
-        this.scheduleOnce(() => {
+        
             this.unschedule(this.countDownCallback);
             console.log("End Game called");
             this.GamePlayer.active = false;
             this.GameOver.active = true;
             this.GameOverScore.string = "Score: " + this.score;
             this.GameOverHighScore.string = "Best: " + this.highScore;
-        }, 60);
+        
     }
 
     // update (dt) {},
