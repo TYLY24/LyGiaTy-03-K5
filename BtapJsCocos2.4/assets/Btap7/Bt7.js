@@ -14,9 +14,13 @@ cc.Class({
                 this.label = labelRef;
 
                 this.tasks.push(() => {
-                    console.log(`My name is ${name}`);
-                    if (this.label) this.label.string = `My name is ${name}`;
-                    this.next();
+                    
+                    setTimeout(() => {
+                       console.log(`My name is ${name}`);
+                       if (this.label) this.label.string = `My name is ${name}`;
+                        this.next();
+                    }, 1000);
+                    
                 });
 
                 setTimeout(() => {
@@ -31,9 +35,13 @@ cc.Class({
 
             eat(food) {
                 this.tasks.push(() => {
-                    console.log(`I am eating ${food}`);
-                    if (this.label) this.label.string = `I am eating ${food}`;
-                    this.next();
+                    
+
+                     setTimeout(() => {
+                       console.log(`I am eating ${food}`);
+                        if (this.label) this.label.string = `I am eating ${food}`;
+                        this.next();
+                    }, 1000);
                 });
                 return this;
             }

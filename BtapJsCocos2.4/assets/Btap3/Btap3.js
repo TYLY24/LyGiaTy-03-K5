@@ -22,7 +22,7 @@ cc.Class({
     },
 
     async loadImagesToSprites(urls, spriteList) {
-        for (let i = 0; i < urls.length && i < spriteList.length; i++) {
+        for (let i = 0; i < urls.length; i++) {
             try {
                 const response = await fetch(urls[i]);
                 const blob = await response.blob();

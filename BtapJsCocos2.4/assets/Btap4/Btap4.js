@@ -2,81 +2,95 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // Create a label in the Cocos UI
-      
+        label: cc.Label
     },
 
-    // LIFE-CYCLE CALLBACKS:
+    onLoad() {
+        this.output = [];
+    },
 
-    start () {
-        // Create the Store class with label handling
-        class Store {
-            constructor(name) {
-                this.name = name;
-                this.dependencies = [];
-                this.isContributed = false;
-            }
+    start() {
+        this.runContributeExample();
+    },
 
-            // Method to specify dependencies (other stores it has to wait for)
-            wait(store) {
-                this.dependencies.push(store);
-            }
-
-            // Method to contribute (wait until all dependencies are resolved)
-            async contribute(stepTime, ...stores) {
-                // Create a set of stores that need to be contributed
-                let contributionQueue = stores.slice();
-                let resultText = '';
-
-                // Sort the stores based on dependencies, i.e., store waiting for another store
-                while (contributionQueue.length > 0) {
-                    for (let i = 0; i < contributionQueue.length; i++) {
-                        const store = contributionQueue[i];
-
-                        // Check if all dependencies of the store have been contributed
-                        const allDependenciesMet = store.dependencies.every(dep => dep.isContributed);
-
-                        if (allDependenciesMet) {
-                            // If all dependencies are met, mark the store as contributed
-                            resultText += store.name + '\n'; // Add store's name to the result text
-                            store.isContributed = true;
-
-                            // Remove the store from the queue as it's now contributed
-                            contributionQueue.splice(i, 1);
-                            break;
-                        }
-                    }
-                    // Wait for the specified step time before checking again
-                    await new Promise(resolve => setTimeout(resolve, stepTime * 1000));
-                }
-
-                // Once all stores have contributed, update the label
-                this.updateLabel(resultText);
-            }
-
-            // Method to update the label with the final result
-            updateLabel(resultText) {
-                // Set the result to the label component
-                console.log(resultText);
-                
-                
-            }
+    // ----------- Class Store ------------
+    Store: class {
+        constructor(name) {
+            this.name = name;
+            this.dependencies = [];
+            this.executed = false;
         }
 
-        // Create stores
+        wait(otherStore) {
+            this.dependencies.push(otherStore);
+        }
+
+        async run() {
+            if (this.executed) return;
+            for (let dep of this.dependencies) {
+                await dep.run();
+            }
+            this.executed = true;
+        }
+    },
+
+    // ----------- Hàm contribute ----------
+    async contribute(stepTime, ...stores) {
+        for (let store of stores) {
+            await store.run(); // Đảm bảo tất cả được đánh dấu executed đúng cách
+        }
+
+        // Lọc ra theo thứ tự thực thi dựa trên dependencies
+        const executedOrder = [];
+
+        const visited = new Set();
+        async function dfs(store) {
+            if (visited.has(store)) return;
+            for (let dep of store.dependencies) {
+                await dfs(dep);
+            }
+            visited.add(store);
+            executedOrder.push(store);
+        }
+
+        for (let store of stores) {
+            await dfs(store);
+        }
+
+        // In ra từng store theo thời gian stepTime
+        for (let store of executedOrder) {
+            await this.delay(stepTime * 1000);
+            console.log(store.name);
+            this.appendLabel(store.name);
+        }
+    },
+
+    // ---------- Hỗ trợ delay ------------
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    },
+
+    // ---------- Hiển thị ra label --------
+    appendLabel(text) {
+        this.output.push(text);
+        this.label.string = this.output.join("\n");
+    },
+
+    // ---------- Ví dụ bài tập ------------
+    async runContributeExample() {
+        const Store = this.Store; // shorthand
+
         const store1 = new Store('store_1');
         const store2 = new Store('store_2');
         const store3 = new Store('store_3');
         const store4 = new Store('store_4');
         const store5 = new Store('store_5');
 
-        // Define dependencies (wait for other stores)
         store1.wait(store3);
         store3.wait(store2);
         store2.wait(store5);
         store5.wait(store4);
 
-        // Start contributing with 3 seconds interval
-        store1.contribute(3, store1, store2, store3, store4, store5);
-    },
+        await this.contribute(3, store1, store2, store3, store4, store5);
+    }
 });
