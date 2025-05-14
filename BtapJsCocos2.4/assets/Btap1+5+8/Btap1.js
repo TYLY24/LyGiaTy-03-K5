@@ -8,12 +8,12 @@ cc.Class({
     start () {
         this.updateLabelTime();
         this.localDelay();
-        this.measureLatency();
+      //   this.measureLatency();
     },
 
     async updateLabelTime() {
         const time = await this.getServerTime();
-        this.label.string = new Date(time).toLocaleString();
+        this.label.string = time.toLocaleString();//new Date(time).toLocaleString();
     },
 
     // Bài 5 - đo thời gian local (chạy vòng lặp đo latency đơn giản)
@@ -39,7 +39,8 @@ cc.Class({
         const dateHeader = response.headers.get('Date');
 
         if (dateHeader) {
-        return new Date(dateHeader).getTime();
+            console.log(dateHeader);
+        return new Date(dateHeader);//.getTime();
         } else {
         throw new Error("Date header not found");
         }
@@ -68,13 +69,22 @@ cc.Class({
     },
 
     // Đo độ trễ giữa local time và server time
-    async measureLatency() {
-        const getLocalTime = () => new Date().getTime();
+    async  measureLatencyWithServerTime() {
+    let startTime = await this.getServerTime(); 
 
-        const localTime = await this.promisify(getLocalTime)();
-        const serverTime = await this.promisify(this.getServerTime.bind(this))();
-        const latency = serverTime - localTime;
+    for (let i = 0; i < 10; i++) {
+        const currentTime = await this.getServerTime(); 
+        const latency = currentTime - startTime;
+        startTime = currentTime;
+        console.log('Độ trễ: ' + latency + ' ms');
 
-        console.log("Độ trễ giữa local và server: " + latency + "ms");
+        await this.delay(1000); // ✅ đúng
+ // thêm delay nếu muốn mỗi lần đo cách nhau 1s
     }
+    },
+
+    delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 });
