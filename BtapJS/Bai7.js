@@ -25,17 +25,20 @@ function callbackManager(functions)
     console.log("Started callbackManager");
     let functionsIndex=0;
     
-    function next() {
+    function next(ID) {
         if (functionsIndex < functions.length) {
-            functions[functionsIndex++](() => {next()});
-          
+            functions[ID](() => {
+                functionsIndex++;
+                next(ID+1)
+            });
+            
         }
         else{
             console.log("Complete Async");
         }
     }
 
-    next();
+    next(functionsIndex);
 }
 
 // driver code

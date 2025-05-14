@@ -3,7 +3,7 @@
         return new Promise(function(resolve) {
             setTimeout(function() {
                 console.log("Nguyễn thị A");
-                resolve();
+                resolve("A OK");
             }
             , 1000);
         });
@@ -24,30 +24,48 @@
         return new Promise(function(resolve,reject) {
             setTimeout(function() {
                 console.log("Trần thị C");
-                resolve();
+                resolve("A OK");
                 //reject("Lỗi thị C");
             }
             , 2000);
         });
     }
 
-
+    let ErrorPart= null
     async function Bai12()
     {
         try {
             await BanA();
+            
         } catch (error) {
-            console.error("Lỗi của thị A:", error);
+           // console.error("Lỗi của thị A:", error);
+            if(ErrorPart) ErrorPart("Lỗi của thị A:"+ error);
         }
         try {
             await BanB();
         } catch (error) {
-            console.error("Lỗi của thị B:", error);
+           // console.error("Lỗi của thị B:", error);
+            if(ErrorPart) ErrorPart("Lỗi của thị B:"+ error);
         }
         try {
             await BanC();
         } catch (error) {
-            console.error("Lỗi chỗ thi C:", error);
+           // console.error("Lỗi chỗ thi C:", error);
+            if(ErrorPart) ErrorPart("Lỗi của thị C:"+ error);
         }
     }
-    Bai12();
+    
+    async function Bai12Test2() {
+        console.log("Bắt đầu kiểm tra...");
+        const PromiseError = new Promise((resolve) =>
+        {
+            ErrorPart =resolve;
+            
+        }
+        );
+        let ErrorName= await PromiseError;
+        console.log("Error:" + ErrorName);
+    }
+
+     Bai12();
+    Bai12Test2();
