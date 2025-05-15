@@ -34,7 +34,6 @@ cc.Class({
         }
     },
 
-    // ----------- Hàm contribute ----------
     async contribute(stepTime, ...stores) {
         for (let store of stores) {
             await store.run(); // Đảm bảo tất cả được đánh dấu executed đúng cách
@@ -65,18 +64,15 @@ cc.Class({
         }
     },
 
-    // ---------- Hỗ trợ delay ------------
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     },
 
-    // ---------- Hiển thị ra label --------
     appendLabel(text) {
         this.output.push(text);
         this.label.string = this.output.join("\n");
     },
 
-    // ---------- Ví dụ bài tập ------------
     async runContributeExample() {
         const Store = this.Store; // shorthand
 
