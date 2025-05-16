@@ -2,7 +2,7 @@ async function asyncFunc1() {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve("asyncFunc1: Thành công");
-        }, 2000);
+        }, 1000);
     });
 }
 
@@ -16,10 +16,10 @@ async function asyncFunc2() {
 }
 
 async function asyncFunc3() {
-    return new Promise((_, reject) => {
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
-            reject("asyncFunc3: Thất bại");
-        }, 1000);
+            resolve("asyncFunc3: Thất bại");
+        }, 1500);
     });
 }
 
@@ -35,7 +35,7 @@ function timeoutFunc(timeout) {
 function Bai15() {
     const asyncArr = [asyncFunc1, asyncFunc2, asyncFunc3];
 
-    const timeout = 2500;
+    const timeout = 3000;
 
     const promiseArr = [
         ...asyncArr.map(func => func()),
